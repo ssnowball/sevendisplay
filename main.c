@@ -14,7 +14,7 @@ const uint PIN_SEG_F = 13;
 const uint PIN_SEG_G = 14;
 const uint PIN_SEG_P = 15;
 
-int bits[10] = {
+int bits[16] = {
 	0x3f,
 	0x06,
 	0x5b,
@@ -24,12 +24,18 @@ int bits[10] = {
 	0x7d,
 	0x07,
 	0x7f,
-	0x67
+	0x67,
+	0x77,
+	0x7c,
+	0x39,
+	0x5e,
+	0x79,
+	0x71
 };
 
 
 int main() {
-	bi_decl(bi_program_description("This is a program to count from 0 to 9 when a button is pressed"));
+	bi_decl(bi_program_description("This is a program to count from 0 to 9 and A to F when a button is pressed"));
 	bi_decl(bi_1pin_with_name(PIN_BTN, "External Push button, with pull up resistor"));
 	bi_decl(bi_pin_mask_with_name(0x3f << PIN_SEG_A , "0 - bit mask"));
 	bi_decl(bi_pin_mask_with_name(0x06 << PIN_SEG_A , "1 - bit mask"));
@@ -41,6 +47,13 @@ int main() {
 	bi_decl(bi_pin_mask_with_name(0x07 << PIN_SEG_A , "7 - bit mask"));
 	bi_decl(bi_pin_mask_with_name(0x7f << PIN_SEG_A , "8 - bit mask"));
 	bi_decl(bi_pin_mask_with_name(0x67 << PIN_SEG_A , "9 - bit mask"));
+	
+	bi_decl(bi_pin_mask_with_name(0x77 << PIN_SEG_A , "A - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x7c << PIN_SEG_A , "B - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x39 << PIN_SEG_A , "C - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x5e << PIN_SEG_A , "D - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x79 << PIN_SEG_A , "E - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x71 << PIN_SEG_A , "F - bit mask"));
 	
 	stdio_init_all();
 	
@@ -87,7 +100,7 @@ int main() {
 		
 		if(!gpio_get(PIN_BTN)) {
 			puts("Button Pressed");
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < (sizeof(bits) / sizeof(bits[0])); i++) {
 				int32_t mask = bits[i];
 				gpio_put_masked(0xff << PIN_SEG_A, mask << PIN_SEG_A);
 				sleep_ms(1000);
