@@ -29,10 +29,18 @@ int bits[10] = {
 
 
 int main() {
-	//bi_decl(bi_program_description("This is a program to blink 3 LEDs."));
-	//bi_decl(bi_1pin_with_name(PIN_REDLED, "External Red LED"));
-	//bi_decl(bi_1pin_with_name(PIN_YELLOWLED, "External Yellow LED"));
-	//bi_decl(bi_1pin_with_name(PIN_GREENLED, "External Green LED"));
+	bi_decl(bi_program_description("This is a program to count from 0 to 9 when a button is pressed"));
+	bi_decl(bi_1pin_with_name(PIN_BTN, "External Push button, with pull up resistor"));
+	bi_decl(bi_pin_mask_with_name(0x3f << PIN_SEG_A , "0 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x06 << PIN_SEG_A , "1 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x5b << PIN_SEG_A , "2 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x4f << PIN_SEG_A , "3 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x66 << PIN_SEG_A , "4 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x6d << PIN_SEG_A , "5 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x7d << PIN_SEG_A , "6 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x07 << PIN_SEG_A , "7 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x7f << PIN_SEG_A , "8 - bit mask"));
+	bi_decl(bi_pin_mask_with_name(0x67 << PIN_SEG_A , "9 - bit mask"));
 	
 	stdio_init_all();
 	
